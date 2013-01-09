@@ -1,0 +1,26 @@
+[submodule "vim-pathogen"]
+    path = vim-pathogen
+    url = git://github.com/tpope/vim-pathogen.git
+
+[submodule "bundle/vim-colors-solarized"]
+    path = bundle/vim-colors-solarized
+    url = git://github.com/altercation/vim-colors-solarized.git
+
+[submodule "bundle/fugitive"]
+    path = bundle/fugitive
+    url = git://github.com/tpope/vim-fugitive.git
+
+[submodule "bundle/syntastic"]
+    path = bundle/syntastic
+    url = git://github.com/scrooloose/syntastic.git
+
+[submodule "bundle/lusty-juggler"]
+    path = bundle/lusty-juggler
+    url = https://github.com/vim-scripts/LustyJuggler.git
+
+[submodule "bundle/taglist"]
+    path = bundle/taglist
+    url = https://github.com/vim-scripts/taglist.vim.git
+
+
+
