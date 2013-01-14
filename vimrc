@@ -77,9 +77,9 @@ set autoread
 let g:indent_guides_auto_colors = 0
 
 " And manually set the colors
-hi IndentGuidesOdd  guibg=#404040
+"hi IndentGuidesOdd  guibg=#404040
 " this is a black-ish color: 212121
-hi IndentGuidesEven guibg=#404040
+"hi IndentGuidesEven guibg=#404040
 
 " Ratchet down the width of each marker
 let g:indent_guides_guide_size = 1
@@ -87,9 +87,11 @@ let g:indent_guides_guide_size = 1
 " Don't start at the initial (left-most) level -- wait until we get at least 1 tab in
 let g:indent_guides_start_level = 2
 
+hi IndentGuidesEven guibg=#535353
+hi IndentGuidesOdd guibg=#757575
+
 " Now that we've setup the plugin, enable it
 autocmd vimenter * :IndentGuidesEnable
-
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
