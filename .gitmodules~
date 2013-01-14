@@ -1,0 +1,44 @@
+[submodule "vim-pathogen"]
+    path = vim-pathogen
+    url = git://github.com/tpope/vim-pathogen.git
+
+[submodule "bundle/vim-colors-solarized"]
+    path = bundle/vim-colors-solarized
+    url = git://github.com/altercation/vim-colors-solarized.git
+
+[submodule "bundle/vim-fugitive"]
+    path = bundle/vim-fugitive
+    url = git://github.com/tpope/vim-fugitive.git
+
+[submodule "bundle/syntastic"]
+    path = bundle/syntastic
+    url = git://github.com/scrooloose/syntastic.git
+
+[submodule "bundle/lusty-juggler"]
+    path = bundle/lusty-juggler
+    url = https://github.com/vim-scripts/LustyJuggler.git
+
+[submodule "bundle/taglist"]
+    path = bundle/taglist
+    url = https://github.com/vim-scripts/taglist.vim.git
+
+[submodule "bundle/nerdtree"]
+    path = bundle/nerdtree
+    url = git://github.com/scrooloose/nerdtree.git
+
+[submodule "bundle/vim-mru"]
+    path = bundle/vim-mru
+    url = git://github.com/ornicar/vim-mru.git
+
+[submodule "bundle/vim-surround"]
+    path = bundle/vim-surround
+    url = git://github.com/tpope/vim-surround.git
+
+[submodule "bundle/tagbar"]
+    path = bundle/tagbar
+    url = git://github.com/majutsushi/tagbar.git
+
+[submodule "bundle/indent-guides"]
+    path = bundle/indent-guides
+    url = https://github.com/nathanaelkane/vim-indent-guides.git
+

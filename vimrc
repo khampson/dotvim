@@ -46,8 +46,19 @@
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup pathogen for simpler runtimepath management
+
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = ['tabbar']
+
+" for some reason the csscolor plugin is very slow when run on the terminal
+" but not in GVim, so disable it if no GUI is running
+"if !has('gui_running')
+"    call add(g:pathogen_disabled, 'csscolor')
+"endif
+
 call pathogen#infect()
 
+" ======
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -265,7 +276,12 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
+" set viminfo=%
+
+" Related to sessionman
+set viminfo='100,<500,s10,h,!
+autocmd VimEnter * SessionOpenLast
 
 
 """"""""""""""""""""""""""""""
@@ -464,12 +480,30 @@ highlight Pmenu ctermfg=1 ctermbg=4 guibg=grey30
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='✗'
+let g:syntastic_auto_loc_list=1         " the error window will be automatically opened when errors are detected, and closed when none are detected
 
 " Tlist settings
 "autocmd * :TlistOpen
 let Tlist_Auto_Open=1
 
 " LustyJuggler settings
-let g:LustyJugglerDefaultMappings = 0
-nmap <silent> <Leader>l :LustyJuggler<CR>
+let g:LustyJugglerDefaultMappings = 1
+" nmap <silent> <Leader>l :LustyJuggler<CR>
 
+
+" LustyJuggler settings
+" nmap <silent> <Leader>k :LustyBufferExplorer<CR>
+
+" Make it so that it doesn't save global and local values in a session (and therefore potentially
+" overwrite changes made here upon loading).
+" see http://stackoverflow.com/questions/1642611/how-to-save-a-session-in-vim
+set ssop-=options "
+
+" see http://stackoverflow.com/questions/4226905/vim-nerdtree-not-recovered-in-session-restore
+" Save session on quitting Vim
+"autocmd VimLeave * TlistClose
+"autocmd VimLeave * mksession! [filename]
+
+" Restore session on starting Vim
+"autocmd VimEnter * call MySessionRestoreFunction()
+"autocmd VimEnter * NERDTree
