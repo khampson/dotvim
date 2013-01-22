@@ -48,7 +48,7 @@
 " Setup pathogen for simpler runtimepath management
 
 " To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = ['tabbar']
+let g:pathogen_disabled = ['tabbar', 'taglist']
 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
@@ -282,9 +282,10 @@ autocmd BufReadPost *
 " set viminfo=%
 
 " Related to sessionman
-set viminfo='100,<500,s10,h,!
-autocmd VimEnter * SessionOpenLast
-
+" set viminfo='100,<500,s10,h,!,%
+set viminfo='100,<500,s10,h,%
+ autocmd VimEnter * SessionOpenLast
+" autocmd VimEnter * if argc() == 0 | SessionOpenLast | endif
 
 """"""""""""""""""""""""""""""
 " => Status line
