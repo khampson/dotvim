@@ -85,7 +85,7 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 
 " Don't start at the initial (left-most) level -- wait until we get at least 1 tab in
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 1
 
 hi IndentGuidesEven guibg=#535353
 hi IndentGuidesOdd guibg=#757575
@@ -164,6 +164,9 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
+
+" Force .pgsql files to be syntax-highlighted as SQL files instead of plain text
+au BufReadPost *.pgsql set syntax=sql
 
 "colorscheme desert
 ":colors ir_black
@@ -510,3 +513,9 @@ set ssop-=options "
 " Restore session on starting Vim
 "autocmd VimEnter * call MySessionRestoreFunction()
 "autocmd VimEnter * NERDTree
+
+
+if !has("gui_running")
+    autocmd VimEnter * :colors torte
+endif
+
