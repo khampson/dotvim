@@ -1,3 +1,6 @@
 sessions/*
 .netrwhist
+.vim/bundle/*
+.vim/back/*
+.vim/undo/*
 
