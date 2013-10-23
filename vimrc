@@ -2,8 +2,10 @@
 "
 " Focused on Ubuntu and GVim.
 "
+" Vundle used for module management.
 "
-" Written/compiled by Ken Hampson, 2013
+"
+" Written/compiled 2013 by Ken Hampson, hampsonk+github@gmail.com
 
 
 " Facts
@@ -348,9 +350,11 @@ Bundle 'chrisbra/csv.vim'
 Bundle "Shougo/vimshell.vim"
 
 
-" Bundle 'sjbach/lusty'		" LustyBuffer, LustyExplorer, LustyJuggler
-Bundle 'vim-scripts/LustyJuggler'
-Bundle 'vim-scripts/LustyExplorer'
+" LustyBuffer, LustyExplorer, LustyJuggler
+Bundle 'sjbach/lusty'
+"Bundle 'vim-scripts/LustyJuggler'
+"Bundle 'vim-scripts/LustyExplorer'
+
 " LustyJuggler settings
 let g:LustyJugglerDefaultMappings = 1
 " nmap <silent> <Leader>l :LustyJuggler<CR>
@@ -438,8 +442,11 @@ autocmd BufReadPost *
 " Related to sessionman
 " set viminfo='100,<500,s10,h,!,%
 set viminfo='100,<500,s10,h,%
- autocmd VimEnter * SessionOpenLast
-" autocmd VimEnter * if argc() == 0 | SessionOpenLast | endif
+
+if has("gui_running")
+	autocmd VimEnter * SessionOpenLast
+	" autocmd VimEnter * if argc() == 0 | SessionOpenLast | endif
+endif
 
 
 
