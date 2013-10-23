@@ -1,5 +1,8 @@
 " .vimrc config
 "
+" Focused on Ubuntu and GVim.
+"
+"
 " Written/compiled by Ken Hampson, 2013
 
 
@@ -21,6 +24,7 @@ function! s:setupWrapping()
   set textwidth=72
   set nolist
 endfunction
+
 
 " Basics
 set nocompatible	" Use vim, no vi defaults
@@ -74,9 +78,9 @@ set tm=500
 
 " GUI customization
 "set guicursor=a:blinkon0 " Shut off the blinking cursor
-"set guioptions-=T  "remove toolbar
-set guioptions-=L
-set guioptions=-l
+"set guioptions-=T	"remove toolbar
+"set guioptions-=L
+"set guioptions=-l	" Remove Menu toolbar
 
 if has("gui_running")
     set guioptions-=T
@@ -152,11 +156,11 @@ set pastetoggle=<F4>
 
 Bundle 'nathanaelkane/vim-indent-guides'
 " Auto-enable the indent guides plugin
-"let g:indent_guides_enable_on_vim_startup = 1
+autocmd vimenter * let g:indent_guides_enable_on_vim_startup = 1
 "autocmd vimenter * :indentguidesenable
 
 " In order to work with the desert colorscheme, need to turn off autocoloring
-let g:indent_guides_auto_colors = 0		" incl
+autocmd vimenter * let g:indent_guides_auto_colors = 0		" incl
 
 " And manually set the colors
 "hi IndentGuidesOdd  guibg=#404040
@@ -164,13 +168,13 @@ let g:indent_guides_auto_colors = 0		" incl
 "hi IndentGuidesEven guibg=#404040
 
 " Ratchet down the width of each marker
-let g:indent_guides_guide_size = 1
+autocmd vimenter * let g:indent_guides_guide_size = 1
 
 " Don't start at the initial (left-most) level -- wait until we get at least 1 tab in
-let g:indent_guides_start_level = 1
+autocmd vimenter * let g:indent_guides_start_level = 1
 
-hi IndentGuidesEven guibg=#535353
-hi IndentGuidesOdd guibg=#757575
+autocmd vimenter * hi IndentGuidesEven guibg=#535353
+autocmd vimenter * hi IndentGuidesOdd guibg=#757575
 
 " Now that we've setup the plugin, enable it
 autocmd vimenter * :IndentGuidesEnable
@@ -253,6 +257,8 @@ let g:syntastic_error_symbol='✗'
 let g:syntastic_auto_loc_list=1         " the error window will be automatically opened when errors are detected, and closed when none are detected
 
 
+" auto-complete for Python
+Bundle 'davidhalter/jedi-vim'
 
 " Bundle 'Shougo/neocomplete.vim'
 " let g:acp_enableAtStartup = 0
@@ -261,7 +267,7 @@ let g:syntastic_auto_loc_list=1         " the error window will be automatically
 " let g:neocomplete#enable_auto_delimiter = 1
 " let g:neocomplete#max_list = 15
 " let g:neocomplete#force_overwrite_completefunc = 1
-
+" 
 " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -269,11 +275,11 @@ let g:syntastic_auto_loc_list=1         " the error window will be automatically
 " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 " autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
+" 
 " if !exists('g:neocomplete#sources#omni#input_patterns')
 "   let g:neocomplete#sources#omni#input_patterns = {}
 " endif
-
+" 
 " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
