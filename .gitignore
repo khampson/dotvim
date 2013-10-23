@@ -1,6 +1,7 @@
 sessions/*
 .netrwhist
-.vim/bundle/*
-.vim/back/*
-.vim/undo/*
+bundle/*
+back/*
+undo/*
+old_pathogen_config/bundle/*
 
