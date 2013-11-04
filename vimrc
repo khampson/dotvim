@@ -143,6 +143,7 @@ Bundle 'mbbill/undotree'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
 " Bundle 'matchit.zip'
 
 " Tabbing, text and indent related
