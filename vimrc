@@ -369,6 +369,7 @@ Bundle 'vim-scripts/mru.vim'
 
 syntax enable		           	        " Turn on syntax highlighting allowing local overrides
 au BufReadPost *.pgsql set syntax=sql		" Force .pgsql files to be syntax-highlighted as SQL files instead of plain text
+au BufReadPost *.t set syntax=perl		    " Force .t files to be syntax-highlighted as Perl files instead of plain text
 
 filetype plugin indent on
 
