@@ -56,7 +56,9 @@ set background=dark
 set number                      " Show line numbers
 set ruler                       " Show line and column number
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
-set cursorline
+
+set cursorline                  " highlight the current line (this can slow things down quite a bit); changing this requires a restart of gvim to take effect - reloading the .vimrc isn't enough
+
 set showmatch			" Show matching brackets when text indicator is over them
 set mat=2			" How many tenths of a second to blink when matching brackets
 set cmdheight=2			" Height of the command bar
@@ -158,12 +160,16 @@ set si			"Smart indent
 set pastetoggle=<F4>
 
 Bundle 'nathanaelkane/vim-indent-guides'
-" Auto-enable the indent guides plugin
+
+" Auto-enable the indent guides plugin for Python files
 autocmd vimenter * let g:indent_guides_enable_on_vim_startup = 1
+"au BufReadPost *.py let g:indent_guides_enable_on_vim_startup = 1
+
 "autocmd vimenter * :indentguidesenable
 
 " In order to work with the desert colorscheme, need to turn off autocoloring
 autocmd vimenter * let g:indent_guides_auto_colors = 0		" incl
+"autocmd BufReadPost *.py let g:indent_guides_auto_colors = 0		" incl
 
 " And manually set the colors
 "hi IndentGuidesOdd  guibg=#404040
@@ -172,15 +178,20 @@ autocmd vimenter * let g:indent_guides_auto_colors = 0		" incl
 
 " Ratchet down the width of each marker
 autocmd vimenter * let g:indent_guides_guide_size = 1
+"autocmd BufReadPost *.py let g:indent_guides_guide_size = 1
 
 " Don't start at the initial (left-most) level -- wait until we get at least 1 tab in
 autocmd vimenter * let g:indent_guides_start_level = 1
+"autocmd BufReadPost *.py let g:indent_guides_start_level = 1
 
 autocmd vimenter * hi IndentGuidesEven guibg=#535353
+"autocmd BufReadPost *.py hi IndentGuidesEven guibg=#535353
 autocmd vimenter * hi IndentGuidesOdd guibg=#757575
+"autocmd BufReadPost *.py hi IndentGuidesOdd guibg=#757575
 
 " Now that we've setup the plugin, enable it
 autocmd vimenter * :IndentGuidesEnable
+"autocmd BufReadPost *.py :IndentGuidesEnable
 
 
 " Linebreak on 500 characters
@@ -363,7 +374,7 @@ let g:LustyJugglerDefaultMappings = 1
 
 
 Bundle 'vim-scripts/mru.vim'
-
+Bundle 'vim-scripts/YankRing.vim'
 
 " End Vundle incantation
 
