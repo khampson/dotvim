@@ -272,7 +272,10 @@ let g:syntastic_auto_loc_list=1         " the error window will be automatically
 
 
 " auto-complete for Python
-Bundle 'davidhalter/jedi-vim'
+" Bundle 'davidhalter/jedi-vim'
+
+" combo auto-complete, which wraps jedi, among other things
+Bundle 'Valloric/YouCompleteMe'
 
 " Bundle 'Shougo/neocomplete.vim'
 " let g:acp_enableAtStartup = 0
