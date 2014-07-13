@@ -17,7 +17,7 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Functions
 function! s:setupWrapping()
@@ -56,13 +56,11 @@ set background=dark
 set number                      " Show line numbers
 set ruler                       " Show line and column number
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
-
 set cursorline                  " highlight the current line (this can slow things down quite a bit); changing this requires a restart of gvim to take effect - reloading the .vimrc isn't enough
-
-set showmatch			" Show matching brackets when text indicator is over them
-set mat=2			" How many tenths of a second to blink when matching brackets
-set cmdheight=2			" Height of the command bar
-set lazyredraw			" Don't redraw while executing macros (good performance config)
+set showmatch			        " Show matching brackets when text indicator is over them
+set mat=2			            " How many tenths of a second to blink when matching brackets
+set cmdheight=2			        " Height of the command bar
+set lazyredraw			        " Don't redraw while executing macros (good performance config)
 
 set list                          " Show invisible characters
 set listchars=""                  " Reset the listchars
@@ -81,15 +79,15 @@ set tm=500
 
 
 " GUI customization
-"set guicursor=a:blinkon0 " Shut off the blinking cursor
+set guicursor=a:blinkon0 " Shut off the blinking cursor
 "set guioptions-=T	"remove toolbar
 "set guioptions-=L
 "set guioptions=-l	" Remove Menu toolbar
 
 if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
-    set t_Co=256
+    set guioptions-=T                       " Remove Toolbar.  Currently only affects Win32, GTK+, Motif, Photon and Athena GUIs
+    set guioptions+=e                       " Add tab pages when indicated with 'showtabline'
+    set t_Co=256                            " Make Vim use 256 colors
     set guitablabel=%M\ %t
 
   if has("autocmd")
@@ -97,12 +95,14 @@ if has("gui_running")
     autocmd VimResized * wincmd =
   endif
 else
-    autocmd VimEnter * :colors torte
+    autocmd VimEnter * :colors torte        " Torte seems to work better visually in a greater variety of terminals.
 endif
 
 
 if os == "Darwin"
   set guifont=Inconsolata\ for\ Powerline:h13
+else
+    set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
 endif
 
 
@@ -117,11 +117,17 @@ set smartcase         " ... unless they contain at least one capital letter
 set backspace=indent,eol,start		" Configure backspace so it acts more intuitively
 
 " nnoremap <leader>fef :normal! gg=G``<CR> " Format the entire file
-" nmap <leader>u mQviwU`Q                  " upper/lower word
-" nmap <leader>l mQviwu`Q
-" nmap <leader>U mQgewvU`Q                 " upper/lower first char of word
-" nmap <leader>L mQgewvu`Q
-" nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`' " swap two words
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
+" swap two words
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 
 " if exists("g:enable_mvim_shift_arrow")
 "   let macvim_hig_shift_movement = 1 " mvim shift-arrow-keys
@@ -140,26 +146,39 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'mbbill/undotree'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-" Bundle 'matchit.zip'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'mbbill/undotree'
+
+Plugin 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=0
+
+" Default next mapping (<C-n>) conflicts with YankRing, so switching
+let g:multi_cursor_next_key='<C-l>'
+let g:multi_cursor_prev_key='<C-k>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" Default highlighting (see help :highlight and help :highlight-link)
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
+
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-repeat'
+" Plugin 'matchit.zip'
+
 
 " Tabbing, text and indent related
 set expandtab		" use spaces instead of tabs
 set smarttab
-"set shiftwidth=2
 "set softtabstop=2
-set shiftwidth=4	" 1 tab == 4 spaces
+set shiftwidth=4	    " 1 tab == 4 spaces
 set tabstop=4
 set autoindent
-set si			"Smart indent
+set si			        "Smart indent
 set pastetoggle=<F4>
 
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Auto-enable the indent guides plugin for Python files
 autocmd vimenter * let g:indent_guides_enable_on_vim_startup = 1
@@ -207,17 +226,23 @@ set textwidth=0
 set wrapmargin=0
 
 " Buffer/file management
-nmap <silent> <leader>cd :lcd %:h<CR>         " cd to the directory containing the file in the buffer
-nmap <silent> <leader>md :!mkdir -p %:p:h<CR> " Create the directory containing the file in the buffer
-"Bundle 'vim-scripts/ZoomWin'
 
-Bundle 'scrooloose/nerdtree'
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
+
+" Create the directory containing the file in the buffer
+nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
+
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'scrooloose/nerdtree'
 
 set autoread			" Set to auto read when a file is changed from the outside
-nmap <leader>w :w!<cr>		" Fast saving
-set hid				" A buffer becomes hidden when it is abandoned
 
-Bundle 'rgarver/Kwbd.vim'
+" Fast saving
+nmap <leader>w :w!<cr>
+set hid				    " A buffer becomes hidden when it is abandoned
+
+Plugin 'rgarver/Kwbd.vim'
 nnoremap <silent> ,d :<C-u>Kwbd<CR>
 
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem,*.pyc
@@ -237,18 +262,20 @@ elseif os == "Darwin"
 endif
 
 " Status bar and formatting
-set laststatus=2                       " not sure what this does, but it unconfuses airline (Always show the status line)
+set laststatus=2                       " Always show the status line (otherwise vim-airline won't appear right away)
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" Bundle 'bling/vim-airline'
-" let g:airline_theme = 'powerlineish'
-" let g:airline#extensions#tagbar#enabled = 0
-" let g:airline_powerline_fonts = 1
-" let g:airline_detect_whitespace = 0
+Plugin 'bling/vim-airline'
+let g:airline_theme = 'powerlineish'
+" let g:airline_theme = 'molokai'
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 1
+let g:airline_detect_whitespace = 0
 
 
 " Git
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -263,7 +290,9 @@ map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 " Code
-Bundle 'scrooloose/syntastic'
+
+Plugin 'scrooloose/syntastic'
+
 " Syntastic settings
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
@@ -272,12 +301,13 @@ let g:syntastic_auto_loc_list=1         " the error window will be automatically
 
 
 " auto-complete for Python
-" Bundle 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 
 " combo auto-complete, which wraps jedi, among other things
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
-" Bundle 'Shougo/neocomplete.vim'
+
+" Plugin 'Shougo/neocomplete.vim'
 " let g:acp_enableAtStartup = 0
 " let g:neocomplete#enable_at_startup = 1
 " let g:neocomplete#enable_smart_case = 1
@@ -304,30 +334,30 @@ Bundle 'Valloric/YouCompleteMe'
 
 
 if executable('ctags')
-  Bundle 'majutsushi/tagbar'
+  Plugin 'majutsushi/tagbar'
 endif
 
 " Finding files
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
 
 
 " Ack stuff
-" if executable('ack-grep')
-"   let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-"   Bundle 'mileszs/ack.vim'
-" elseif executable('ack')
-"   Bundle 'mileszs/ack.vim'
-" elseif executable('ag')
-"   Bundle 'mileszs/ack.vim'
-"   let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-" endif
+if executable('ack-grep')
+  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+   Plugin 'mileszs/ack.vim'
+elseif executable('ack')
+  Plugin 'mileszs/ack.vim'
+elseif executable('ag')
+  Plugin 'mileszs/ack.vim'
+  let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+endif
 
 
 " Colors
-" Bundle 'rking/vim-detailed'
-" Bundle 'chriskempson/vim-tomorrow-theme'
+" Plugin 'rking/vim-detailed'
+" Plugin 'chriskempson/vim-tomorrow-theme'
 " colorscheme Tomorrow-Night-Bright
 " autocmd BufEnter,BufNewFile {*.rb,Gemfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,config.ru,*.rake} colorscheme detailed
 " autocmd BufLeave {*.rb,Gemfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,config.ru,*.rake} colorscheme Tomorrow-Night-Bright
@@ -335,40 +365,44 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -
 colorscheme desert
 
 " Languages
-" Bundle 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 " let g:rubycomplete_buffer_loading = 1
 " let g:rubycomplete_classes_in_global = 1
 " let g:rubycomplete_rails = 1
 
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'groenewege/vim-less'
 
-Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'tpope/vim-haml'
-Bundle 'slim-template/vim-slim'
+Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'tpope/vim-haml'
+Plugin 'slim-template/vim-slim'
 
-Bundle 'elzr/vim-json'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
 autocmd BufRead,BufNewFile {*.coffee,Cakefile} setf coffee
-Bundle "jQuery"
+Plugin 'jQuery'
 
-" Bundle 'jnwhiteh/vim-golang'
+" Plugin 'jnwhiteh/vim-golang'
 
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
 
-Bundle 'chrisbra/csv.vim'
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 0        " :RainbowToggle
+
+
+Plugin 'chrisbra/csv.vim'
 
 "Shell
-Bundle "Shougo/vimshell.vim"
+Plugin 'Shougo/vimshell.vim'
 
 
 " LustyBuffer, LustyExplorer, LustyJuggler
-Bundle 'sjbach/lusty'
-"Bundle 'vim-scripts/LustyJuggler'
-"Bundle 'vim-scripts/LustyExplorer'
+Plugin 'sjbach/lusty'
+"Plugin 'vim-scripts/LustyJuggler'
+"Plugin 'vim-scripts/LustyExplorer'
 
 " LustyJuggler settings
 let g:LustyJugglerDefaultMappings = 1
@@ -376,12 +410,12 @@ let g:LustyJugglerDefaultMappings = 1
 " nmap <silent> <Leader>k :LustyBufferExplorer<CR>
 
 
-Bundle 'vim-scripts/mru.vim'
-Bundle 'vim-scripts/YankRing.vim'
+Plugin 'vim-scripts/mru.vim'
+Plugin 'vim-scripts/YankRing.vim'
 
 " End Vundle incantation
 
-syntax enable		           	        " Turn on syntax highlighting allowing local overrides
+syntax enable		           	            " Turn on syntax highlighting allowing local overrides
 au BufReadPost *.pgsql set syntax=sql		" Force .pgsql files to be syntax-highlighted as SQL files instead of plain text
 au BufReadPost *.t set syntax=perl		    " Force .t files to be syntax-highlighted as Perl files instead of plain text
 
