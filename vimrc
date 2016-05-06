@@ -15,7 +15,7 @@ let os = substitute(system('uname'), "\n", "", "")
 " filetype on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+call vundle#begin()
 
 Plugin 'gmarik/vundle'
 
@@ -102,7 +102,8 @@ endif
 if os == "Darwin"
   set guifont=Inconsolata\ for\ Powerline:h13
 else
-    set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+    " set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+    set guifont=Ubuntu\ Mono\ for\ Powerline\ 14
 endif
 
 
@@ -265,7 +266,14 @@ endif
 set laststatus=2                       " Always show the status line (otherwise vim-airline won't appear right away)
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'edkolev/tmuxline.vim'
+
+
 let g:airline_theme = 'powerlineish'
 " let g:airline_theme = 'molokai'
 let g:airline#extensions#tagbar#enabled = 1
@@ -336,6 +344,9 @@ Plugin 'Valloric/YouCompleteMe'
 if executable('ctags')
   Plugin 'majutsushi/tagbar'
 endif
+
+" Pig syntax highlighting
+Plugin 'motus/pig.vim'
 
 " Finding files
 Plugin 'kien/ctrlp.vim'
@@ -413,7 +424,9 @@ let g:LustyJugglerDefaultMappings = 1
 Plugin 'vim-scripts/mru.vim'
 Plugin 'vim-scripts/YankRing.vim'
 
-" End Vundle incantation
+" All plugins above here
+call vundle#end()
+
 
 syntax enable		           	            " Turn on syntax highlighting allowing local overrides
 au BufReadPost *.pgsql set syntax=sql		" Force .pgsql files to be syntax-highlighted as SQL files instead of plain text
