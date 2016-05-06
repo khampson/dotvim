@@ -179,6 +179,14 @@ set autoindent
 set si			        "Smart indent
 set pastetoggle=<F4>
 
+Plugin 'autowitch/hive.vim'
+" for .hql files
+au BufNewFile,BufRead *.hql set filetype=hive expandtab
+
+" for .q files
+au BufNewFile,BufRead *.q set filetype=hive expandtab
+
+
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " Auto-enable the indent guides plugin for Python files
