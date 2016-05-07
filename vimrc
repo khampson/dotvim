@@ -167,14 +167,6 @@ highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
 
 
-Plugin 'autowitch/hive.vim'
-" for .hql files
-au BufNewFile,BufRead *.hql set filetype=hive expandtab
-
-" for .q files
-au BufNewFile,BufRead *.q set filetype=hive expandtab
-
-
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-repeat'
