@@ -71,6 +71,9 @@ set listchars+=extends:>          " The character to show in the last column whe
 set listchars+=precedes:<         " The character to show in the last column when wrap is
                                   " off and the line continues beyond the left of the screen
 
+set colorcolumn=160             " Draw a vertical line down the screen at this column to mark the max line width
+
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -102,8 +105,8 @@ endif
 if os == "Darwin"
   set guifont=Inconsolata\ for\ Powerline:h13
 else
-    " set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
-    set guifont=Ubuntu\ Mono\ for\ Powerline\ 14
+    set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+    " set guifont=Ubuntu\ Mono\ for\ Powerline\ 14
 endif
 
 
@@ -162,6 +165,15 @@ let g:multi_cursor_quit_key='<Esc>'
 " Default highlighting (see help :highlight and help :highlight-link)
 highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
+
+
+Plugin 'autowitch/hive.vim'
+" for .hql files
+au BufNewFile,BufRead *.hql set filetype=hive expandtab
+
+" for .q files
+au BufNewFile,BufRead *.q set filetype=hive expandtab
+
 
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -314,6 +326,10 @@ let g:syntastic_auto_loc_list=1         " the error window will be automatically
 " combo auto-complete, which wraps jedi, among other things
 Plugin 'Valloric/YouCompleteMe'
 
+Plugin 'jmcantrell/vim-virtualenv'
+
+let g:virtualenv_directory='~/workspace/virtualenvs'
+
 
 " Plugin 'Shougo/neocomplete.vim'
 " let g:acp_enableAtStartup = 0
@@ -394,6 +410,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 autocmd BufRead,BufNewFile {*.coffee,Cakefile} setf coffee
 Plugin 'jQuery'
+
+Plugin 'tfnico/vim-gradle'
 
 " Plugin 'jnwhiteh/vim-golang'
 
@@ -507,7 +525,7 @@ autocmd BufReadPost *
 set viminfo='100,<500,s10,h,%
 
 if has("gui_running")
-	autocmd VimEnter * SessionOpenLast
+	" autocmd VimEnter * SessionOpenLast
 	" autocmd VimEnter * if argc() == 0 | SessionOpenLast | endif
 endif
 
